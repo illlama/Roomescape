@@ -1,4 +1,5 @@
 #include <bangtal.h>
+#include <string>
 using namespace bangtal;
 
 int main() {
@@ -15,7 +16,26 @@ int main() {
 		key->pick();
 		return true;
 		});
-
+	//휴지통 생성
+	auto trash = Object::create("images/휴지통.png", scene1, 1000, 200);
+	trash->setScale(0.3f);
+	auto Memo = Object::create("images/쪽지.png", scene1, 900, 250, false);
+	auto trash_count = 0;
+	trash->setOnMouseCallback([&](ObjectPtr object, int x, int y, MouseAction action)->bool {
+		if (trash_count == 1) {
+			Memo->pick();
+			showMessage("까마귀, 까마귀가 안에 있습니다. 까마귀를 조심하세요..");
+			trash->setImage("images/빈휴지통.png");
+		}
+		else if (trash_count < 1) {
+			trash_count++;
+			showMessage("까마귀가 모든 비밀을 알고있어");
+		}
+		else {
+			showMessage("휴지통엔 아무것도 없습니다.");
+		}
+		return true;
+		});
 	// 화분 생성
 	auto flowerpot_moved = false;
 	auto flowerpot = Object::create("images/화분.png", scene1, 550, 150);
@@ -46,7 +66,7 @@ int main() {
 
 	auto keypad = Object::create("images/키패드.png", scene1, 915, 400);
 	keypad->setOnMouseCallback([&](ObjectPtr object, int x, int y, MouseAction action)->bool {
-		showKeypad("OOP", door1);		//door3 콜백
+		showKeypad("AAAB", door1);		//door3 콜백
 		return true;
 		});
 
@@ -62,7 +82,7 @@ int main() {
 				door1_open = true;
 			}
 			else if (key->isHanded() && locked) {
-				showMessage("쪽지가 문고리에서 떨어졌다! 쪽지엔 Object-Oriented Programming 이라고 적혀있다!");
+				showMessage("비밀번호를 풀어야한다.");
 			}
 			else {
 				showMessage("문이 잠겨있다 열쇠가 우선 필요할거같다.");
@@ -82,10 +102,10 @@ int main() {
 		});
 
 	auto door3_open = false;
-	auto door3 = Object::create("images/문-오른쪽-닫힘.png", scene2, 690, 315,false);
+	auto door3 = Object::create("images/문-오른쪽-닫힘.png", scene2, 690, 315, false);
 	door3->setScale(0.5f);
 	door3->setOnMouseCallback([&](ObjectPtr object, int x, int y, MouseAction action)->bool {
-		
+
 		if (door3_open == true) {	//문 열림
 			endGame();
 		}
@@ -95,7 +115,7 @@ int main() {
 		}
 		return true;
 		});
-	
+
 	auto button = Object::create("images/스위치.png", scene2, 885, 440);
 	button->setOnMouseCallback([&](ObjectPtr object, int x, int y, MouseAction action)->bool {
 		if (scene2_lighted) {
