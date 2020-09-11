@@ -1,4 +1,5 @@
-# Roomescape
+# Roomescape from Crow!
+
 Roomescape 20141113 김일혁 과제
 
 방은 세개로 이뤄져있습니다.
@@ -10,4 +11,4 @@ Roomescape 20141113 김일혁 과제
 
 
 
-첫번째 방 비밀번호는 'CROW'입니다.
+>첫번째 방 **비밀번호**는 ~~'CROW'~~ 입니다.
